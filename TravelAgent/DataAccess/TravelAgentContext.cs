@@ -7,6 +7,7 @@ using TravelAgent.Models;
 
 namespace TravelAgent.DataAccess
 {
+    // https://docs.microsoft.com/en-us/aspnet/core/data/ef-rp/intro?view=aspnetcore-5.0&tabs=visual-studio
     public class TravelAgentContext : DbContext
     {
         public TravelAgentContext(DbContextOptions<TravelAgentContext> options)
@@ -19,6 +20,9 @@ namespace TravelAgent.DataAccess
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<TodoItem>().ToTable("TodoItem");
+            modelBuilder.Entity<Tourist>().ToTable("Tourist");
         }
+
+        public DbSet<TravelAgent.Models.Tourist> Tourist { get; set; }
     }
 }

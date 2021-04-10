@@ -30,8 +30,8 @@ namespace TravelAgent
                 try
                 {
                     var context = services.GetRequiredService<TravelAgentContext>();
-                    context.Database.EnsureCreated();
-                    // DbInitializer.Initialize(context);
+                    //context.Database.EnsureCreated();
+                    DbInitializer.Initialize(context);
                 }
                 catch (Exception ex)
                 {

@@ -1,0 +1,9 @@
+
+From the Package Manager Console, VS -> Tools -> Nuget Package Manager -> Package Manager Console
+ref: https://docs.microsoft.com/en-us/aspnet/core/data/ef-rp/migrations?view=aspnetcore-5.0&tabs=visual-studio
+
+Drop Database
+    - Drop-Database
+Add new migration:
+    - Add-Migration InitialCreate
+    - Update-Database
