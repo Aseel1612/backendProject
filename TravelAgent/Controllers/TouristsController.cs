@@ -42,6 +42,20 @@ namespace TravelAgent.Controllers
             return tourist;
         }
 
+        // GET: api/Tourists/5
+        [HttpGet("{email}")]
+        public async Task<ActionResult<Tourist>> GetTouristByEmail(string email)
+        {
+            var tourist = await _context.Tourist.FirstOrDefaultAsync(x=>x.Email==email);
+
+            if (tourist == null)
+            {
+                return NotFound();
+            }
+
+            return tourist;
+            
+        }
         // PUT: api/Tourists/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
@@ -78,6 +92,14 @@ namespace TravelAgent.Controllers
         [HttpPost]
         public async Task<ActionResult<Tourist>> PostTourist(Tourist tourist)
         {
+
+            var isTouristExist = await _context.Tourist.AnyAsync(x => x.Email == tourist.Email);
+
+            if (isTouristExist)
+            {
+                return StatusCode(StatusCodes.Status409Conflict, $"Tourist with email address {tourist.Email} is already exists.");
+            }
+
             _context.Tourist.Add(tourist);
             await _context.SaveChangesAsync();
 
